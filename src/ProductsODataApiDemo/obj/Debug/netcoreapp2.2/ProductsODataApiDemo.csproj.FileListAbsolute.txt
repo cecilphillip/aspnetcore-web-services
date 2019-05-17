@@ -1,0 +1,17 @@
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsODataApiDemo\bin\Debug\netcoreapp2.2\appsettings.Development.json
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsODataApiDemo\bin\Debug\netcoreapp2.2\appsettings.json
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsODataApiDemo\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsODataApiDemo\bin\Debug\netcoreapp2.2\ProductsODataApiDemo.deps.json
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsODataApiDemo\bin\Debug\netcoreapp2.2\ProductsODataApiDemo.runtimeconfig.json
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsODataApiDemo\bin\Debug\netcoreapp2.2\ProductsODataApiDemo.runtimeconfig.dev.json
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsODataApiDemo\bin\Debug\netcoreapp2.2\ProductsODataApiDemo.dll
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsODataApiDemo\bin\Debug\netcoreapp2.2\ProductsODataApiDemo.pdb
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsODataApiDemo\obj\Debug\netcoreapp2.2\ProductsODataApiDemo.csproj.CoreCompileInputs.cache
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsODataApiDemo\obj\Debug\netcoreapp2.2\ProductsODataApiDemo.RazorAssemblyInfo.cache
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsODataApiDemo\obj\Debug\netcoreapp2.2\ProductsODataApiDemo.RazorAssemblyInfo.cs
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsODataApiDemo\obj\Debug\netcoreapp2.2\ProductsODataApiDemo.AssemblyInfoInputs.cache
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsODataApiDemo\obj\Debug\netcoreapp2.2\ProductsODataApiDemo.AssemblyInfo.cs
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsODataApiDemo\obj\Debug\netcoreapp2.2\ProductsODataApiDemo.RazorTargetAssemblyInfo.cache
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsODataApiDemo\obj\Debug\netcoreapp2.2\ProductsODataApiDemo.dll
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsODataApiDemo\obj\Debug\netcoreapp2.2\ProductsODataApiDemo.pdb
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsODataApiDemo\obj\Debug\netcoreapp2.2\ProductsODataApiDemo.csprojAssemblyReference.cache

@@ -1,0 +1,14 @@
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsApiDemo\bin\Release\netcoreapp2.2\ProductsApiDemo.deps.json
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsApiDemo\bin\Release\netcoreapp2.2\ProductsApiDemo.runtimeconfig.json
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsApiDemo\bin\Release\netcoreapp2.2\ProductsApiDemo.runtimeconfig.dev.json
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsApiDemo\bin\Release\netcoreapp2.2\ProductsApiDemo.dll
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsApiDemo\bin\Release\netcoreapp2.2\ProductsApiDemo.pdb
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsApiDemo\obj\Release\netcoreapp2.2\ProductsApiDemo.csprojAssemblyReference.cache
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsApiDemo\obj\Release\netcoreapp2.2\ProductsApiDemo.csproj.CoreCompileInputs.cache
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsApiDemo\obj\Release\netcoreapp2.2\ProductsApiDemo.RazorAssemblyInfo.cache
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsApiDemo\obj\Release\netcoreapp2.2\ProductsApiDemo.RazorAssemblyInfo.cs
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsApiDemo\obj\Release\netcoreapp2.2\ProductsApiDemo.AssemblyInfoInputs.cache
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsApiDemo\obj\Release\netcoreapp2.2\ProductsApiDemo.AssemblyInfo.cs
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsApiDemo\obj\Release\netcoreapp2.2\ProductsApiDemo.RazorTargetAssemblyInfo.cache
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsApiDemo\obj\Release\netcoreapp2.2\ProductsApiDemo.dll
+C:\Users\cecilphillip\Desktop\AspNetCoreWebApiDemos\ProductsApiDemo\obj\Release\netcoreapp2.2\ProductsApiDemo.pdb
