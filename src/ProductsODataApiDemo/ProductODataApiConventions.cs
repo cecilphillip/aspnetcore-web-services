@@ -6,8 +6,8 @@ namespace ProductsODataApiDemo
 {
     public static class ProductODataApiConventions
     {        
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
         public static void Get(){ }

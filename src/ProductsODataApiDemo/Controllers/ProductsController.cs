@@ -2,16 +2,14 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Routing;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using ProductsODataApiDemo;
 using ProductsODataApiDemo.Data;
 using ProductsODataApiDemo.Models;
 
 //[assembly: ApiConventionType(typeof(DefaultApiConventions))]
-//[assembly: ApiConventionType(typeof(ProductODataApiConventions))]
+[assembly: ApiConventionType(typeof(ProductODataApiConventions))]
 
 namespace ProductsODataApiDemo.Controllers
 {
@@ -20,17 +18,15 @@ namespace ProductsODataApiDemo.Controllers
     public class ProductsController : ODataController
     {
         private readonly DemoODataApiDbContext _ctx;
-
-        public LinkGenerator _linkGenerator { get; }
-
-        public ProductsController(DemoODataApiDbContext ctx, LinkGenerator linkGenerator)
+        
+        public ProductsController(DemoODataApiDbContext ctx)
         {
             _ctx = ctx;
-            _linkGenerator = linkGenerator;
         }
 
-        [HttpGet]
-        [ODataRoute("")]
+        [HttpGet("")]
+        [EnableQuery]
+        [ODataRoute]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
             var products = await _ctx.Products.ToListAsync();
@@ -41,7 +37,8 @@ namespace ProductsODataApiDemo.Controllers
             return NotFound();
         }
 
-        [HttpGet]
+        [HttpGet("")]
+        [EnableQuery]
         [ODataRoute("({id})")]
         public async Task<ActionResult<Product>> GetProduct([FromODataUri]string id)
         {
@@ -53,7 +50,7 @@ namespace ProductsODataApiDemo.Controllers
             return Ok(product);
         }
 
-        [HttpPatch]
+        [HttpPatch("")]
         [ODataRoute("({id})")]
         public async Task<IActionResult> UpdateProduct([FromODataUri]string id, Delta<Product> delta)
         {
@@ -68,16 +65,16 @@ namespace ProductsODataApiDemo.Controllers
             return Updated(product);
         }
 
-        [HttpPost]
+        [HttpPost("")]
         [ODataRoute]
-        public async Task<ActionResult> PostProduct(Product newProduct)
+        public async Task<IActionResult> PostProduct([FromBody]Product newProduct)
         {
-            await _ctx.Products.AddAsync(newProduct);
-            var url = _linkGenerator.GetPathByName("GetById", newProduct);
-            return Created(url, newProduct);
+            _ctx.Products.Add(newProduct);
+            await _ctx.SaveChangesAsync();
+            return Created(newProduct);
         }
 
-        [HttpDelete]
+        [HttpDelete("")]
         [ODataRoute("({id})")]
         public async Task<ActionResult> DeleteProduct([FromODataUri]string id)
         {

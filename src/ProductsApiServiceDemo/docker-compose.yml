@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  productservice:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: final
+    expose:
+      - "80"
+    depends_on:
+      - consulservice
+    networks:
+      - product-api-network
+  consulservice:
+    container_name: consul.server
+    image: consul:1.5.0
+    restart: unless-stopped
+    expose:
+      - "8500"
+      - "8600"
+      - "8300"
+    ports:
+      - "8500:8500"
+      - "8600:8600" 
+    command: consul agent -dev -ui -client 0.0.0.0 -bind 0.0.0.0
+    networks:
+      - product-api-network      
+networks:
+  product-api-network:
+    driver: bridge

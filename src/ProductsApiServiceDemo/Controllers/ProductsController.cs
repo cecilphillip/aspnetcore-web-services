@@ -4,14 +4,13 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
-using ProductsApiDemo;
-using ProductsApiDemo.Data;
 using ProductsApiDemo.Models;
+using ProductsApiServiceDemo.Data;
 
 [assembly: ApiConventionType(typeof(DefaultApiConventions))]
 //[assembly: ApiConventionType(typeof(ProductApiConventions))]
 
-namespace ProductsApiDemo.Controllers
+namespace ProductsApiServiceDemo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -19,7 +18,7 @@ namespace ProductsApiDemo.Controllers
     {
         private readonly DemoApiDbContext _ctx;
 
-        public LinkGenerator _linkGenerator { get; }
+        private readonly LinkGenerator _linkGenerator;
 
         public ProductsController(DemoApiDbContext ctx, LinkGenerator linkGenerator)
         {

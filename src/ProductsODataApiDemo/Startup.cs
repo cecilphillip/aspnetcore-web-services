@@ -62,6 +62,7 @@ namespace ProductsODataApiDemo
 
             app.UseMvc(b =>
             {
+                b.Select().OrderBy().Filter().Count().MaxTop(10);
                 b.MapODataServiceRoute("odata", "odata", GetEdmModel());
             });
 
