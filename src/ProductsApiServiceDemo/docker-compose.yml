@@ -24,7 +24,7 @@ services:
       - "8600:8600" 
     command: consul agent -dev -ui -client 0.0.0.0 -bind 0.0.0.0
     networks:
-      - product-api-network      
+      - product-api-network
 networks:
   product-api-network:
     driver: bridge

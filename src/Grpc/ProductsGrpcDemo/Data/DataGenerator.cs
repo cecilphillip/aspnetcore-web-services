@@ -1,10 +1,11 @@
-﻿using Bogus;
-using ProductsApiDemo.Models;
 using System.Collections.Generic;
 using System.Globalization;
+using Bogus;
+using Products;
 
-namespace ProductsApiDemo.Data
+namespace ProductsGrpcDemo.Data
 {
+   
     public static class DataGenerator
     {
         public static IEnumerable<Product> GetProducts(int count = 50)
@@ -13,9 +14,9 @@ namespace ProductsApiDemo.Data
             Faker<Product> productFaker = new Faker<Product>()
                 .RuleFor(p => p.Id, f => f.Random.Guid().ToString("N"))
                 .RuleFor(p => p.Name, f => f.Commerce.ProductName())
-                .RuleFor(p => p.Price, f => decimal.Parse(f.Commerce.Price(), CultureInfo.InvariantCulture))
-                .RuleFor(p => p.Quantity, f => f.Random.Number(0, 200))
-                .RuleFor(p => p.ProducedBy, f => f.Company.CompanyName());
+                .RuleFor(p => p.Price, f => double.Parse(f.Commerce.Price(), CultureInfo.InvariantCulture))
+                .RuleFor(p => p.Quantity, f => f.Random.UInt(0, 200))
+                .RuleFor(p => p.ProductedBy, f => f.Company.CompanyName());
 
             return productFaker.Generate(count);
         }
