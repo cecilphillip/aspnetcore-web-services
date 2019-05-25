@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ProductsGrpcDemo.Data;
+using Prometheus;
 
 namespace ProductsGrpcDemo
 {
@@ -29,9 +26,12 @@ namespace ProductsGrpcDemo
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
             app.UseRouting();
-
+            
+            app.UseMetricServer();
+            app.UseHttpMetrics();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<GrpcProductService>();

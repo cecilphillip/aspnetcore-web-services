@@ -1,0 +1,8 @@
+global:
+   scrape_interval: 45s
+   scrape_timeout: 30s
+
+scrape_configs:
+   - job_name: 'grpc-prometheus'
+     static_configs:
+        - targets: ['grpcservice:50050']
