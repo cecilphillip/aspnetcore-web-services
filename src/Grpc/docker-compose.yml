@@ -1,0 +1,37 @@
+version: "3.7"
+
+services:
+  grpcservice:
+    container_name: grpcservice
+    build:
+      context: ProductsGrpcDemo/
+      dockerfile: Dockerfile
+      target: final
+    expose:
+      - "50050"
+      - "50051"
+    ports:
+    - 50051:50051
+    - 50050:50050
+    depends_on:
+      - prometheus
+    networks:
+      - grpc-api-network
+  prometheus:
+    container_name: prometheus.server
+    image: prom/prometheus:v2.9.2
+    ports:
+      - 9090:9090
+    expose:
+      - "9090"
+    restart: unless-stopped
+    networks:
+      - grpc-api-network
+    volumes:
+      - ${PWD}/prometheus.yml:/config/prometheus.yml
+    command:
+      - '--config.file=/config/prometheus.yml'
+      - '--storage.tsdb.path=./data'
+networks:
+  grpc-api-network:
+    driver: bridge
