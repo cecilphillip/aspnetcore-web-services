@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package products;
+
+service ProductService {
+  rpc GetProduct (ProductIdMessage) returns (Product);
+  rpc GetProducts (GetProductsRequest) returns (ProductList);
+  rpc AddProduct (Product) returns (ProductOperationResponse);
+  rpc DeleteProduct (ProductIdMessage) returns (ProductOperationResponse);
+}
+
+message ProductList {
+  repeated Product products = 1;
+}
+
+message Product {
+  string id = 1;
+  string name = 2;
+  uint32 quantity = 3;
+  double price = 4;
+  string producted_by = 5;
+}
+
+message GetProductsRequest {}
+
+message ProductIdMessage {
+  string id = 1;
+}
+
+message ProductOperationResponse {
+  bool success = 1;
+  string operation_name = 2;
+}

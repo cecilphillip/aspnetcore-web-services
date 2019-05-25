@@ -10,8 +10,6 @@ namespace ProductsApiDemo
         public static void Main(string[] args)
         {
             var host = CreateWebHostBuilder(args).Build();
-            //var dbContext = host.Services.GetService<DemoApiDbContext>();
-            //dbContext.Database.EnsureCreated();
             host.Run();
         }
 
