@@ -24,16 +24,16 @@ namespace ProductsApiServiceDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDiscoveryClient(Configuration);
-            
+
             services.AddDbContext<DemoApiDbContext>(opts => {
                 opts.UseSqlite("Data Source=products.db");
             });
-            
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            
+
             services.AddHealthChecks()
                 .AddDbContextCheck<DemoApiDbContext>();
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Products API Service", Version = "v1" });
@@ -63,7 +63,7 @@ namespace ProductsApiServiceDemo
             {
                 c.DisplayOperationId();
                 c.DisplayRequestDuration();
-                
+
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
             });
 

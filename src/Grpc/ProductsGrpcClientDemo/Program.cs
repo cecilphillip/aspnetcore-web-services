@@ -17,11 +17,11 @@ namespace ProductsGrpcClientDemo
 
             foreach (var product in response.Products)
             {
-                Console.WriteLine($"{product.Name} - {product.ProductedBy} - {product.Price}");
+                Console.WriteLine($"{product.Name} - {product.ProducedBy} - {product.Price}");
             }
-            
+
             await channel.ShutdownAsync();
-            
+
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }

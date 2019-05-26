@@ -66,11 +66,12 @@ namespace ProductsApiServiceDemo.Controllers
         public async Task<ActionResult> PostProduct(Product newProduct)
         {
             await _ctx.Products.AddAsync(newProduct);
-            var url = _linkGenerator.GetPathByName("GetById", newProduct);
+            await _ctx.SaveChangesAsync();
+            var url = _linkGenerator.GetPathByAction(HttpContext, "GetProduct", "Products", new { id = newProduct.Id });
             return Created(url, newProduct);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteProduct(string id)
         {
             var product = await _ctx.Products.FindAsync(id);
