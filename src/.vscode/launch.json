@@ -34,7 +34,7 @@
             "cwd": "${workspaceFolder}/ProductsODataApiDemo",
             "stopAtEntry": false,
             "launchBrowser": {
-                "enabled": true,
+                "enabled": false,
                 "args": "${auto-detect-url}/swagger"
             },
             "env": {
@@ -43,6 +43,58 @@
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
             }
+        },
+        {
+            "name": "ProductsApiServiceDemo (web)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build ProductsApiServiceDemo",
+            "program": "${workspaceFolder}/ProductsApiServiceDemo/bin/Debug/netcoreapp2.2/ProductsApiServiceDemo.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/ProductsApiServiceDemo",
+            "stopAtEntry": false,
+            "launchBrowser": {
+                "enabled": false,
+                "args": "${auto-detect-url}/swagger"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "ProductsGrpcDemo (web)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build ProductsGrpcDemo",
+            "program": "${workspaceFolder}/Grpc/ProductsGrpcDemo/bin/Debug/netcoreapp3.0/ProductsGrpcDemo.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Grpc/ProductsGrpcDemo",
+            "stopAtEntry": false,
+            "launchBrowser": {
+                "enabled": false,
+                "args": "${auto-detect-url}/swagger"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "Products Grpc Client (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "ProductsGrpcClient build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/Grpc/ProductsGrpcClientDemo/bin/Debug/netcoreapp3.0/ProductsGrpcClientDemo.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Grpc/ProductsGrpcClientDemo",
+            "console": "internalConsole",
+            "stopAtEntry": false
         }
     ]
 }

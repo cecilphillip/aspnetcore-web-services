@@ -107,6 +107,68 @@
             "problemMatcher": "$tsc"
         },
         {
+            "label": "build ProductsGrpcDemo",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Grpc/ProductsGrpcDemo/ProductsGrpcDemo.csproj"
+            ],
+            "problemMatcher": "$tsc",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "publish ProductsGrpcDemo",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/Grpc/ProductsGrpcDemo/ProductsGrpcDemo.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "watch ProductsGrpcDemo",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/Grpc/ProductsGrpcDemo/ProductsGrpcDemo.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "ProductsGrpcClient build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Grpc/ProductsGrpcClientDemo/ProductsGrpcClientDemo.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "ProductsGrpcClient run",
+            "command": "dotnet",
+            "presentation": {
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "type": "process",
+            "args": [
+                "run",
+                "-p",
+                "${workspaceFolder}/Grpc/ProductsGrpcClientDemo/ProductsGrpcClientDemo.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
             "label": "docker: launch consul",
             "type": "process",
             "presentation": {
