@@ -70,6 +70,95 @@
                 "${workspaceFolder}/ProductsODataApiDemo/ProductsODataApiDemo.csproj"
             ],
             "problemMatcher": "$tsc"
+        },
+        {
+            "label": "build ProductsApiServiceDemo",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/ProductsApiServiceDemo/ProductsApiServiceDemo.csproj"
+            ],
+            "problemMatcher": "$tsc",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "publish ProductsApiServiceDemo",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/ProductsApiServiceDemo/ProductsApiServiceDemo.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "watch ProductsApiServiceDemo",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/ProductsApiServiceDemo/ProductsApiServiceDemo.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "docker: launch consul",
+            "type": "process",
+            "presentation": {
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "command": "docker",
+            "args": [
+                "run",
+                "-p",
+                "8500:8500",
+                "--rm",
+                "consul:1.5.0",
+                "agent",
+                "-dev",
+                "-ui",
+                "-client",
+                "0.0.0.0",
+                "-bind",
+                "0.0.0.0"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "docker-comppse: Scale Product Service ",
+            "type": "process",
+            "presentation": {
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "command": "docker-compose",
+            "args": [
+                "--file",
+                "${workspaceFolder}/ProductsApiServiceDemo/docker-compose.yml",
+                "up",
+                "-d",
+                "--scale",
+                "productservice=${input:scaleNum}"
+            ],
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "type": "promptString",
+            "id": "scaleNum",
+            "description": "Enter your scale count",
+            "default": "2"
         }
     ]
 }
