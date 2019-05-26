@@ -15,7 +15,7 @@ namespace ProductsApiServiceDemo.Data
                 .RuleFor(p => p.Name, f => f.Commerce.ProductName())
                 .RuleFor(p => p.Price, f => decimal.Parse(f.Commerce.Price(), CultureInfo.InvariantCulture))
                 .RuleFor(p => p.Quantity, f => f.Random.Number(0, 200))
-                .RuleFor(p => p.ProductedBy, f => f.Company.CompanyName());
+                .RuleFor(p => p.ProducedBy, f => f.Company.CompanyName());
 
             return productFaker.Generate(count);
         }

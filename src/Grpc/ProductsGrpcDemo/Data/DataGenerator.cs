@@ -5,7 +5,7 @@ using Products;
 
 namespace ProductsGrpcDemo.Data
 {
-   
+
     public static class DataGenerator
     {
         public static IEnumerable<Product> GetProducts(int count = 50)
@@ -16,7 +16,7 @@ namespace ProductsGrpcDemo.Data
                 .RuleFor(p => p.Name, f => f.Commerce.ProductName())
                 .RuleFor(p => p.Price, f => double.Parse(f.Commerce.Price(), CultureInfo.InvariantCulture))
                 .RuleFor(p => p.Quantity, f => f.Random.UInt(0, 200))
-                .RuleFor(p => p.ProductedBy, f => f.Company.CompanyName());
+                .RuleFor(p => p.ProducedBy, f => f.Company.CompanyName());
 
             return productFaker.Generate(count);
         }

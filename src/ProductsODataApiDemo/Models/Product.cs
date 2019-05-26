@@ -13,6 +13,6 @@ namespace ProductsODataApiDemo.Models
         public string Name { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
-        public string ProductedBy { get; set; }
+        public string ProducedBy { get; set; }
     }
 }
