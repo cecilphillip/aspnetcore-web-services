@@ -1,0 +1,75 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build ProductsApiDemo",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/ProductsApiDemo/ProductsApiDemo.csproj"
+            ],
+            "problemMatcher": "$tsc",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "publish ProductsApiDemo",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/ProductsApiDemo/ProductsApiDemo.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "watch ProductsApiDemo",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/ProductsApiDemo/ProductsApiDemo.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "build ProductsODataApiDemo",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/ProductsODataApiDemo/ProductsODataApiDemo.csproj"
+            ],
+            "problemMatcher": "$tsc",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "publish ProductsODataApiDemo",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/ProductsODataApiDemo/ProductsODataApiDemo.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "watch ProductsODataApiDemo",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/ProductsODataApiDemo/ProductsODataApiDemo.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        }
+    ]
+}
