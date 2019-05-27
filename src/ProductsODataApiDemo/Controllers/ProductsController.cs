@@ -8,7 +8,6 @@ using ProductsODataApiDemo;
 using ProductsODataApiDemo.Data;
 using ProductsODataApiDemo.Models;
 
-//[assembly: ApiConventionType(typeof(DefaultApiConventions))]
 [assembly: ApiConventionType(typeof(ProductODataApiConventions))]
 
 namespace ProductsODataApiDemo.Controllers
@@ -18,7 +17,7 @@ namespace ProductsODataApiDemo.Controllers
     public class ProductsController : ODataController
     {
         private readonly DemoODataApiDbContext _ctx;
-        
+
         public ProductsController(DemoODataApiDbContext ctx)
         {
             _ctx = ctx;

@@ -9,7 +9,6 @@ using ProductsApiDemo.Data;
 using ProductsApiDemo.Models;
 
 [assembly: ApiConventionType(typeof(DefaultApiConventions))]
-//[assembly: ApiConventionType(typeof(ProductApiConventions))]
 
 namespace ProductsApiDemo.Controllers
 {

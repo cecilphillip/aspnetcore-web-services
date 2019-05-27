@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using ProductsApiDemo.Models;
+using ProductsApiServiceDemo;
 using ProductsApiServiceDemo.Data;
 
-[assembly: ApiConventionType(typeof(DefaultApiConventions))]
-//[assembly: ApiConventionType(typeof(ProductApiConventions))]
+[assembly: ApiConventionType(typeof(ProductApiConventions))]
 
 namespace ProductsApiServiceDemo.Controllers
 {
