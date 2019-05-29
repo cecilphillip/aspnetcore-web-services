@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Net.NetworkInformation;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using ProductsApiServiceDemo.Data;
 using Steeltoe.Discovery.Client;
 using Swashbuckle.AspNetCore.Swagger;
@@ -25,14 +28,26 @@ namespace ProductsApiServiceDemo
         {
             services.AddDiscoveryClient(Configuration);
 
-            services.AddDbContext<DemoApiDbContext>(opts => {
+            services.AddDbContext<DemoApiDbContext>(opts =>
+            {
                 opts.UseSqlite("Data Source=products.db");
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddHealthChecks()
-                .AddDbContextCheck<DemoApiDbContext>();
+                .AddDbContextCheck<DemoApiDbContext>()
+                .AddAsyncCheck("Ping", async () =>
+                {
+                    using (var ping = new Ping())
+                    {
+                        var result = await ping.SendPingAsync("google.com", 3500);
+                        return new HealthCheckResult(
+                            result.Status == IPStatus.Success
+                                ? HealthStatus.Healthy : HealthStatus.Unhealthy
+                        );
+                    }
+                });
 
             services.AddSwaggerGen(c =>
             {
@@ -55,7 +70,11 @@ namespace ProductsApiServiceDemo
 
             app.UseHttpsRedirection();
 
-            app.UseHealthChecks("/health");
+            app.UseHealthChecks("/health", new HealthCheckOptions
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
             app.UseMvc();
 
             app.UseSwagger();
