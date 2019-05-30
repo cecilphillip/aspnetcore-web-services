@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using ProductsApiDemo;
 using ProductsApiDemo.Data;
 using ProductsApiDemo.Models;
+using Microsoft.AspNetCore.Http;
 
-[assembly: ApiConventionType(typeof(DefaultApiConventions))]
-//[assembly: ApiConventionType(typeof(ProductApiConventions))]
+[assembly: ApiConventionType(typeof(ProductApiConventions))]
 
 namespace ProductsApiDemo.Controllers
 {

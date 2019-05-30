@@ -55,7 +55,6 @@ namespace ProductsApiServiceDemo
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -64,7 +63,6 @@ namespace ProductsApiServiceDemo
             }
             else
             {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -73,7 +71,7 @@ namespace ProductsApiServiceDemo
             app.UseHealthChecks("/health", new HealthCheckOptions
             {
                 Predicate = _ => true,
-                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
             app.UseMvc();
 
