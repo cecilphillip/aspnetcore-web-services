@@ -40,14 +40,9 @@ namespace ProductsODataApiDemo
 
             services.AddMvc(options => options.EnableEndpointRouting = false)
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            // services.AddApiVersioning(options => options.ReportApiVersions = true);
-            // services.AddOData().EnableApiVersioning();
-            // services.AddODataApiExplorer();
-            //services.AddSwaggerGen();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env) //, VersionedODataModelBuilder modelBuilder, IApiVersionDescriptionProvider provider)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -65,17 +60,6 @@ namespace ProductsODataApiDemo
                 b.Select().OrderBy().Filter().Count().MaxTop(10);
                 b.MapODataServiceRoute("odata", "odata", GetEdmModel());
             });
-
-            //app.UseSwagger();
-            //app.UseSwaggerUI(
-            //    options =>
-            //    {
-            //        // build a swagger endpoint for each discovered API version
-            //        foreach (var description in provider.ApiVersionDescriptions)
-            //        {
-            //            options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
-            //        }
-            //    });
         }
 
         private static IEdmModel GetEdmModel()

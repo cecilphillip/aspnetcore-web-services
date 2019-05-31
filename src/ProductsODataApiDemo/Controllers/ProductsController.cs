@@ -66,7 +66,7 @@ namespace ProductsODataApiDemo.Controllers
 
         [HttpPost("")]
         [ODataRoute]
-        public async Task<IActionResult> PostProduct([FromBody]Product newProduct)
+        public async Task<IActionResult> PostProduct(Product newProduct)
         {
             _ctx.Products.Add(newProduct);
             await _ctx.SaveChangesAsync();
