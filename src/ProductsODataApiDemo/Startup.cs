@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.OData.Edm;
 using ProductsODataApiDemo.Data;
 using ProductsODataApiDemo.Models;
@@ -37,9 +29,7 @@ namespace ProductsODataApiDemo
             });
 
             services.AddOData();
-
-            services.AddMvc(options => options.EnableEndpointRouting = false)
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -55,10 +45,13 @@ namespace ProductsODataApiDemo
 
             app.UseHttpsRedirection();
 
-            app.UseMvc(b =>
+            app.UseRouting();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                b.Select().OrderBy().Filter().Count().MaxTop(10);
-                b.MapODataServiceRoute("odata", "odata", GetEdmModel());
+                endpoints.MapODataRoute("odata", "odata", GetEdmModel())
+                    .Select().OrderBy().Filter().Count().MaxTop(10);
             });
         }
 
