@@ -3,14 +3,14 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using ProductsApiServiceDemo.Data;
 using Steeltoe.Discovery.Client;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace ProductsApiServiceDemo
 {
@@ -32,7 +32,7 @@ namespace ProductsApiServiceDemo
                 opts.UseSqlite("Data Source=products.db");
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllers().AddNewtonsoftJson();
 
             services.AddHealthChecks()
                 .AddDbContextCheck<DemoApiDbContext>()
@@ -50,11 +50,11 @@ namespace ProductsApiServiceDemo
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Products API Service", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Products API Service", Version = "v1" });
             });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -67,12 +67,15 @@ namespace ProductsApiServiceDemo
 
             app.UseHttpsRedirection();
 
-            app.UseHealthChecks("/health", new HealthCheckOptions
+            app.UseEndpoints(endpoints =>
             {
-                Predicate = _ => true,
-                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health", new HealthCheckOptions
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
             });
-            app.UseMvc();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
