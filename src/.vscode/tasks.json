@@ -195,7 +195,7 @@
             "problemMatcher": []
         },
         {
-            "label": "docker-comppse: Scale Product Service ",
+            "label": "docker-comppse: Scale Product Service",
             "type": "process",
             "presentation": {
                 "focus": true,

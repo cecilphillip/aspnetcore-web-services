@@ -32,7 +32,8 @@ namespace ProductsApiServiceDemo
                 opts.UseSqlite("Data Source=products.db");
             });
 
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllers()
+                .AddNewtonsoftJson();
 
             services.AddHealthChecks()
                 .AddDbContextCheck<DemoApiDbContext>()
@@ -52,6 +53,8 @@ namespace ProductsApiServiceDemo
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Products API Service", Version = "v1" });
             });
+
+            services.AddSwaggerGenNewtonsoftSupport();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -66,12 +69,15 @@ namespace ProductsApiServiceDemo
             }
 
             app.UseHttpsRedirection();
+            app.UseDiscoveryClient();
 
+            app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
                 endpoints.MapHealthChecks("/health", new HealthCheckOptions
                 {
+
                     Predicate = _ => true,
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
                 });
@@ -82,11 +88,8 @@ namespace ProductsApiServiceDemo
             {
                 c.DisplayOperationId();
                 c.DisplayRequestDuration();
-
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
             });
-
-            app.UseDiscoveryClient();
         }
     }
 }

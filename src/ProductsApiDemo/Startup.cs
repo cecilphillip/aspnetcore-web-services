@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using ProductsApiDemo.Data;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace ProductsApiDemo
 {
@@ -17,22 +17,25 @@ namespace ProductsApiDemo
         }
 
         public IConfiguration Configuration { get; }
-        
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DemoApiDbContext>(opts => {
+            services.AddDbContext<DemoApiDbContext>(opts =>
+            {
                 opts.UseSqlite("Data Source=products.db");
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllers().AddNewtonsoftJson();
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Products API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Products API", Version = "v1" });
             });
+
+            services.AddSwaggerGenNewtonsoftSupport();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -44,14 +47,19 @@ namespace ProductsApiDemo
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.DisplayOperationId();
                 c.DisplayRequestDuration();
-                
+
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
         }
