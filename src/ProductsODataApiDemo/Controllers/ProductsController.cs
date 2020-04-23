@@ -51,7 +51,7 @@ namespace ProductsODataApiDemo.Controllers
 
         [HttpPatch("")]
         [ODataRoute("({id})")]
-        public async Task<IActionResult> UpdateProduct([FromODataUri]string id, Delta<Product> delta)
+        public async Task<IActionResult> PatchProduct([FromODataUri]string id, Delta<Product> delta)
         {
             var product = await _ctx.Products.FindAsync(id);
 

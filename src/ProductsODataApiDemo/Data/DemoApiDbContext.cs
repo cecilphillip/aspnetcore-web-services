@@ -3,9 +3,9 @@ using ProductsODataApiDemo.Models;
 
 namespace ProductsODataApiDemo.Data
 {
-    public class DemoODataApiDbContext: DbContext
+    public class DemoODataApiDbContext : DbContext
     {
-        public DemoODataApiDbContext(DbContextOptions<DemoODataApiDbContext> options): base(options)
+        public DemoODataApiDbContext(DbContextOptions<DemoODataApiDbContext> options) : base(options)
         {
             Database.EnsureCreated();
         }
@@ -16,6 +16,11 @@ namespace ProductsODataApiDemo.Data
         {
             modelBuilder.Entity<Product>()
                 .HasKey(p => p.Id);
+
+            modelBuilder.Entity<Product>()
+                .Property(p => p.Id)
+                .ValueGeneratedOnAdd()
+                .HasValueGenerator<GuidStringValueGenerator>();
 
             modelBuilder.Entity<Product>()
                .HasData(DataGenerator.GetProducts());
