@@ -3,6 +3,7 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ProductsApiServiceDemo.Data;
+using Prometheus;
 using Steeltoe.Discovery.Client;
 
 namespace ProductsApiServiceDemo
@@ -37,17 +39,19 @@ namespace ProductsApiServiceDemo
 
             services.AddHealthChecks()
                 .AddDbContextCheck<DemoApiDbContext>()
-                .AddAsyncCheck("Ping", async () =>
-                {
-                    using (var ping = new Ping())
-                    {
-                        var result = await ping.SendPingAsync("google.com", 3500);
-                        return new HealthCheckResult(
-                            result.Status == IPStatus.Success
-                                ? HealthStatus.Healthy : HealthStatus.Unhealthy
-                        );
-                    }
-                });
+                .AddCheck("AlwaysHealthy", () => new HealthCheckResult(HealthStatus.Healthy))
+                // .AddAsyncCheck("Ping", async () =>
+                // {
+                //     using (var ping = new Ping())
+                //     {
+                //         var result = await ping.SendPingAsync("google.com", 3500);
+                //         return new HealthCheckResult(
+                //             result.Status == IPStatus.Success
+                //                 ? HealthStatus.Healthy : HealthStatus.Unhealthy
+                //         );
+                //     }
+                // })
+                ;
 
             services.AddSwaggerGen(c =>
             {
@@ -55,6 +59,17 @@ namespace ProductsApiServiceDemo
             });
 
             services.AddSwaggerGenNewtonsoftSupport();
+
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+
+                // Only loopback proxies are allowed by default.
+                // Clear that restriction because forwarders are enabled by explicit 
+                // configuration.
+                options.KnownNetworks.Clear();
+                options.KnownProxies.Clear();
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -72,12 +87,13 @@ namespace ProductsApiServiceDemo
             app.UseDiscoveryClient();
 
             app.UseRouting();
+            app.UseHttpMetrics();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapMetrics("/metrics");
                 endpoints.MapHealthChecks("/health", new HealthCheckOptions
                 {
-
                     Predicate = _ => true,
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
                 });

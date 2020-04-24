@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProductsApiDemo.Data;
 using ProductsApiDemo.Models;
 
 namespace ProductsApiDemo.Data
 {
-    public class DemoApiDbContext: DbContext
+    public class DemoApiDbContext : DbContext
     {
-        public DemoApiDbContext(DbContextOptions<DemoApiDbContext> options): base(options)
+        public DemoApiDbContext(DbContextOptions<DemoApiDbContext> options) : base(options)
         {
             Database.EnsureCreated();
         }
