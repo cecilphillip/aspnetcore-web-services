@@ -1,9 +1,11 @@
+## Certificate Authority
 ### Create CA key:
 openssl genrsa -passout pass:1111 -des3 -out ca.key 4096
 
 ### Create CA certificate:
 openssl req -passin pass:1111 -new -x509 -days 365 -key ca.key -out ca.crt
 
+# Server
 ### Create server key:
 openssl genrsa -passout pass:1111 -des3 -out server.key 4096
 
@@ -16,6 +18,7 @@ openssl x509 -req -passin pass:1111 -days 365 -in server.csr -CA ca.crt -CAkey c
 ### Remove passphrase from server key:
 openssl rsa -passin pass:1111 -in server.key -out server.key
 
+# Client
 ### Create client key
 openssl genrsa -passout pass:1111 -des3 -out client.key 4096
 
