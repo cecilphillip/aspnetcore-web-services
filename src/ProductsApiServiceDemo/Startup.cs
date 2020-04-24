@@ -83,7 +83,7 @@ namespace ProductsApiServiceDemo
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseDiscoveryClient();
 
             app.UseRouting();

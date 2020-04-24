@@ -1,18 +1,20 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2.5 AS base
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2.204 AS build
-WORKDIR /src
-COPY ProductsApiServiceDemo.csproj .
-RUN dotnet restore 
-COPY . .
-RUN dotnet build -c Release -o /app
+# Copy csproj and restore as distinct layers
+COPY *.csproj ./
+RUN dotnet restore
 
-FROM build AS publish
-RUN dotnet publish ProductsApiServiceDemo.csproj -c Release -o /app
+# Copy everything else and build
+COPY . ./
+RUN dotnet publish ProductsApiServiceDemo.csproj -c Debug -o /app/publish
 
-FROM base AS final
-WORKDIR /app
-ENV ASPNETCORE_ENVIRONMENT Production
-COPY --from=publish /app .
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 as final
+WORKDIR /app 
+ENV ASPNETCORE_ENVIRONMENT=Development \
+    ASPNETCORE_URLS=https://+:443;http://+:80 \ 
+    ASPNETCORE_Kestrel__Certificates__Default__Password=1111 \
+    ASPNETCORE_Kestrel__Certificates__Default__Path=/https/productserviceapi.pfx
+COPY --from=build-env /app/publish .
 ENTRYPOINT ["dotnet", "ProductsApiServiceDemo.dll"]
