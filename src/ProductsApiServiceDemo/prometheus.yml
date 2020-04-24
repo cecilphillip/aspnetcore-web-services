@@ -1,0 +1,21 @@
+scrape_configs:
+  # Scape product service API instances
+  - job_name: "productservice"
+    dns_sd_configs:
+      - names:
+          - "tasks.productservice"
+        type: "A"
+        port: 80
+  # Scrape Prometheus itself every 5 seconds.
+  - job_name: "prometheus"
+    scrape_interval: 5s
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # Scrape docker host
+  - job_name: "docker_host"
+    scrape_interval: 15s
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["host.docker.internal:9100"]

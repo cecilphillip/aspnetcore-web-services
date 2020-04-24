@@ -1,19 +1,27 @@
 version: "3.7"
 services:
   productservice:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
       target: final
     expose:
       - "80"
+      - "443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=1111
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/productserviceapi.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
     depends_on:
       - consulservice
     networks:
       - product-api-network
   consulservice:
     container_name: consul.server
-    image: consul:1.5.0
+    image: consul:1.7.2
     restart: unless-stopped
     expose:
       - "8500"
@@ -21,10 +29,28 @@ services:
       - "8300"
     ports:
       - "8500:8500"
-      - "8600:8600" 
-    command: consul agent -dev -ui -client 0.0.0.0 -bind 0.0.0.0
+      - "8600:8600"
+    volumes:
+      - ./consul.server.json:/etc/consul.d/consul.server.json
+    command: consul agent -dev -ui -client 0.0.0.0 -bind 0.0.0.0 -config-dir /etc/consul.d
     networks:
       - product-api-network
+  prometheusservice:
+    container_name: prometheus.server
+    image: prom/prometheus:v2.17.2
+    restart: unless-stopped
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention=200h"
+      - "--web.enable-lifecycle"
+    networks:
+      - product-api-network
+
 networks:
   product-api-network:
     driver: bridge

@@ -1,0 +1,8 @@
+{
+  "datacenter": "product-service-demo-1",
+  "telemetry": {
+    "prometheus_retention_time": "45s"
+  },
+  "verify_outgoing": false,
+  "verify_server_hostname": false
+}
